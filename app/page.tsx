@@ -286,7 +286,7 @@ export default function HomePage() {
           <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
             {['4 plantillas profesionales', 'Pago único · sin suscripción', 'Generación inmediata'].map(t => (
               <span key={t} className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: 'var(--text-muted)' }}>
-                <IconCheck className="w-3 h-3 flex-shrink-0" style={{ color: '#34d399' } as React.CSSProperties} />
+                <IconCheck className="w-3 h-3 flex-shrink-0 text-emerald-400" />
                 {t}
               </span>
             ))}
