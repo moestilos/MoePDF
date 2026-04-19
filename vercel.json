@@ -1,7 +1,15 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "cd 'Workflow/generador de PDF para autónomos/generador de PDF para autónomos/presupuestos-autonomos' && npm install && npm run build",
-  "installCommand": "echo 'install handled by buildCommand'",
-  "outputDirectory": "Workflow/generador de PDF para autónomos/generador de PDF para autónomos/presupuestos-autonomos/.next"
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "regions": ["cdg1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ]
 }
