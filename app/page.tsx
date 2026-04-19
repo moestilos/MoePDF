@@ -36,7 +36,10 @@ export default function HomePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (!res.ok) { const e = await res.json(); throw new Error(e.error) }
+      if (!res.ok) {
+        const e = await res.json()
+        throw new Error(e.detail ? `${e.error}: ${e.detail}` : (e.error ?? `HTTP ${res.status}`))
+      }
       const result: GenerationResult = await res.json()
       setFormData(data); setGeneration(result); setStep('preview')
       fetch('/api/track-visit', { method: 'POST' }).catch(() => {})

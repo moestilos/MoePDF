@@ -5,27 +5,28 @@ import { useEffect, useState } from 'react'
 import { IconCrown } from './Icons'
 import { ThemeSwitcher } from './ThemeSwitcher'
 
-/** Logo MoePDF — monograma "Mo." bold en badge índigo-violeta */
+/** Logo MoePDF — monograma "Mo." en badge tematizado por CSS vars */
 function FalconIcon({ size = 34 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="fg-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#4338ca"/>
-          <stop offset="1" stopColor="#7c3aed"/>
-        </linearGradient>
-      </defs>
-      <rect width="64" height="64" rx="15" fill="url(#fg-bg)"/>
-      <text
-        x="50%" y="50%"
-        dominantBaseline="central"
-        textAnchor="middle"
-        fontFamily="'Inter','SF Pro Display',system-ui,sans-serif"
-        fontSize="28" fontWeight="900"
-        fill="white"
-        letterSpacing="-1"
-      >Mo.</text>
-    </svg>
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: 15,
+        background: 'linear-gradient(135deg, rgb(var(--brand-rgb)) 0%, rgb(var(--brand-2-rgb)) 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: "'Inter','SF Pro Display',system-ui,sans-serif",
+        fontSize: size * 0.44,
+        fontWeight: 900,
+        color: 'white',
+        letterSpacing: '-1px',
+        boxShadow: '0 4px 14px rgba(var(--brand-rgb),0.35)',
+      }}
+    >
+      Mo.
+    </div>
   )
 }
 
@@ -91,9 +92,9 @@ export function Navbar() {
               href="/admin"
               className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
               style={{
-                background: 'rgba(124,58,237,0.15)',
-                color: '#c4b5fd',
-                border: '1px solid rgba(124,58,237,0.25)',
+                background: 'rgba(var(--brand-2-rgb),0.15)',
+                color: 'rgb(var(--brand-light-rgb))',
+                border: '1px solid rgba(var(--brand-2-rgb),0.25)',
               }}
             >
               <IconCrown className="w-3.5 h-3.5" />

@@ -9,6 +9,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
 import { sql, isUserAdmin } from '@/lib/db'
+import { ensureSchema } from '@/lib/db/schema'
 import { generatePDF } from '@/lib/pdf/generator'
 
 // ============================================
@@ -38,8 +39,12 @@ export async function POST(req: NextRequest) {
     }
 
     // Verificar si el usuario actual es admin
-    const { userId } = await auth()
-    const adminCheck = await isUserAdmin(userId)
+    let userId: string | null = null
+    try {
+      const a = await auth()
+      userId = a.userId
+    } catch {}
+    const adminCheck = userId ? await isUserAdmin(userId).catch(() => false) : false
 
     // Verificar autorización
     if (!adminCheck) {
@@ -93,9 +98,18 @@ export async function PUT(req: NextRequest) {
       )
     }
 
-    // Obtener usuario de Clerk (puede ser null si no está autenticado)
-    const { userId } = await auth()
-    const adminCheck = await isUserAdmin(userId)
+    // Auto-init schema (idempotente, una vez por worker)
+    await ensureSchema()
+
+    // Obtener usuario de Clerk (puede ser null si no está autenticado o Clerk no configurado)
+    let userId: string | null = null
+    try {
+      const a = await auth()
+      userId = a.userId
+    } catch (e) {
+      console.warn('[generate-pdf PUT] auth() failed, continuando como anonimo:', e)
+    }
+    const adminCheck = userId ? await isUserAdmin(userId).catch(() => false) : false
 
     // Insertar en Neon
     const rows = await sql`
@@ -125,6 +139,10 @@ export async function PUT(req: NextRequest) {
     })
   } catch (error) {
     console.error('[generate-pdf PUT]', error)
-    return NextResponse.json({ error: 'Error guardando la generación' }, { status: 500 })
+    const detail = error instanceof Error ? error.message : String(error)
+    return NextResponse.json(
+      { error: 'Error guardando la generación', detail },
+      { status: 500 }
+    )
   }
 }
