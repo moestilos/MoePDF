@@ -119,7 +119,6 @@ export default function HomePage() {
                     style={{
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid rgba(255,255,255,0.08)',
-                      divideColor: 'rgba(255,255,255,0.06)',
                     }}
                   >
                     {[
@@ -160,9 +159,9 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { n: '1', title: 'Elige tu perfil', desc: 'Selecciona tu tipo de actividad. El formulario y el PDF se adaptan a ti.', glow: 'rgba(99,102,241,0.12)' },
-                { n: '2', title: 'Rellena los datos', desc: 'Nombre del cliente, servicio, precio e IVA. Listo en menos de un minuto.', glow: 'rgba(124,58,237,0.10)' },
-                { n: '3', title: 'Descarga tu PDF', desc: 'Preview gratis. Paga 1€ con Stripe para descargar el documento final.', glow: 'rgba(99,102,241,0.10)' },
+                { n: '1', title: 'Elige tu perfil', desc: 'Selecciona tu tipo de actividad. El formulario y el PDF se adaptan a ti.', glow: 'rgba(var(--brand-rgb),0.12)' },
+                { n: '2', title: 'Rellena los datos', desc: 'Nombre del cliente, servicio, precio e IVA. Listo en menos de un minuto.', glow: 'rgba(var(--brand-2-rgb),0.10)' },
+                { n: '3', title: 'Descarga tu PDF', desc: 'Preview gratis. Paga 1€ con Stripe para descargar el documento final.', glow: 'rgba(var(--brand-rgb),0.10)' },
               ].map((s, i) => (
                 <div
                   key={s.n}
@@ -258,7 +257,7 @@ export default function HomePage() {
         {isLanding && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
             {[
-              { Icon: IconTarget,    title: 'Adaptado a tu profesión', desc: 'Formulario y PDF personalizados. Nada genérico.',              color: 'rgba(99,102,241,0.12)',  iconColor: '#818cf8' },
+              { Icon: IconTarget,    title: 'Adaptado a tu profesión', desc: 'Formulario y PDF personalizados. Nada genérico.',              color: 'rgba(var(--brand-rgb),0.12)',  iconColor: 'rgb(var(--brand-light-rgb))' },
               { Icon: IconLightning, title: 'Listo en segundos',        desc: 'Sin registro previo. Rellena y genera al instante.',         color: 'rgba(245,158,11,0.10)',  iconColor: '#fbbf24' },
               { Icon: IconShield,    title: 'Pago seguro',               desc: 'Checkout con Stripe. Descarga inmediata. Sin suscripción.', color: 'rgba(16,185,129,0.10)',  iconColor: '#34d399' },
             ].map(({ Icon, title, desc, color, iconColor }, i) => (
@@ -304,7 +303,7 @@ function PDFMockup() {
       {/* Shadow card */}
       <div
         className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl"
-        style={{ background: 'rgba(99,102,241,0.15)', filter: 'blur(16px)' }}
+        style={{ background: 'rgba(var(--brand-rgb),0.15)', filter: 'blur(16px)' }}
       />
 
       {/* Main card */}
@@ -331,7 +330,7 @@ function PDFMockup() {
           <div className="space-y-2.5">
             {[0.75, 0.5, 0.65].map((w, i) => (
               <div key={i} className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: i === 0 ? '#818cf8' : 'rgba(255,255,255,0.12)' }} />
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: i === 0 ? 'rgb(var(--brand-light-rgb))' : 'rgba(255,255,255,0.12)' }} />
                 <div className="h-[6px] rounded-full" style={{ width: `${w * 100}%`, background: 'rgba(255,255,255,0.07)' }} />
               </div>
             ))}
@@ -349,7 +348,7 @@ function PDFMockup() {
             </div>
             <div className="flex justify-between items-center pt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
               <span className="text-[13px] font-bold text-white">Total</span>
-              <span className="text-[14px] font-black" style={{ color: '#a78bfa' }}>1.815 €</span>
+              <span className="text-[14px] font-black" style={{ color: 'rgb(var(--brand-2-rgb))' }}>1.815 €</span>
             </div>
           </div>
 
@@ -357,7 +356,7 @@ function PDFMockup() {
           <div className="pt-1">
             <div
               className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #7c3aed)', boxShadow: '0 0 20px rgba(99,102,241,0.3)' }}
+              style={{ background: 'linear-gradient(135deg, rgb(var(--brand-rgb)), rgb(var(--brand-2-rgb)))', boxShadow: '0 0 20px rgba(var(--brand-rgb),0.3)' }}
             >
               <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -390,7 +389,7 @@ function PDFMockup() {
           boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
         }}
       >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ color: '#818cf8' }}>
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ color: 'rgb(var(--brand-light-rgb))' }}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
         </svg>
         <span className="text-[11px] font-semibold text-white">Pago seguro</span>
@@ -420,10 +419,10 @@ function StepIndicator({ currentStep }: { currentStep: Step }) {
                 className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300"
                 style={{
                   background: done || current
-                    ? 'linear-gradient(135deg, #6366f1, #7c3aed)'
+                    ? 'linear-gradient(135deg, rgb(var(--brand-rgb)), rgb(var(--brand-2-rgb)))'
                     : 'rgba(255,255,255,0.08)',
                   color: done || current ? 'white' : 'var(--text-muted)',
-                  boxShadow: current ? '0 0 0 3px rgba(99,102,241,0.2)' : 'none',
+                  boxShadow: current ? '0 0 0 3px rgba(var(--brand-rgb),0.2)' : 'none',
                 }}
               >
                 {done
@@ -435,7 +434,7 @@ function StepIndicator({ currentStep }: { currentStep: Step }) {
               </div>
               <span
                 className="text-[11px] font-medium hidden sm:block transition-colors"
-                style={{ color: current ? '#818cf8' : done ? 'var(--text-secondary)' : 'var(--text-muted)' }}
+                style={{ color: current ? 'rgb(var(--brand-light-rgb))' : done ? 'var(--text-secondary)' : 'var(--text-muted)' }}
               >
                 {s.label}
               </span>
@@ -443,7 +442,7 @@ function StepIndicator({ currentStep }: { currentStep: Step }) {
             {i < steps.length - 1 && (
               <div
                 className="w-5 sm:w-8 h-px mx-2 transition-all duration-300"
-                style={{ background: i < currentIndex ? 'rgba(99,102,241,0.5)' : 'rgba(255,255,255,0.08)' }}
+                style={{ background: i < currentIndex ? 'rgba(var(--brand-rgb),0.5)' : 'rgba(255,255,255,0.08)' }}
               />
             )}
           </div>

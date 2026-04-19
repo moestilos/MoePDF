@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { PROFILES, COMMON_FIELDS, ProfileType, FormField } from '@/lib/profiles'
 import { IconBrush, IconBriefcase, IconBarbell, IconCamera, IconSpinner } from './Icons'
 
-const PROFILE_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
+const PROFILE_ICON: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   designer:     IconBrush,
   freelancer:   IconBriefcase,
   trainer:      IconBarbell,

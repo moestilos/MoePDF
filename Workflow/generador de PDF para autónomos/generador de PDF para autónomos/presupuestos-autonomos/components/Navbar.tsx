@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useUser, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 import { useEffect, useState } from 'react'
 import { IconCrown } from './Icons'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 /** Logo MoePDF — monograma "Mo." bold en badge índigo-violeta */
 function FalconIcon({ size = 34 }: { size?: number }) {
@@ -68,7 +69,7 @@ export function Navbar() {
           </div>
           <div className="flex flex-col leading-none">
             <span className="font-black text-[15px] tracking-[-0.03em] text-white">
-              Moe<span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">PDF</span>
+              Moe<span style={{ background: 'linear-gradient(to right, rgb(var(--brand-light-rgb)), rgb(var(--brand-2-rgb)))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>PDF</span>
             </span>
             <span className="text-[9.5px] font-medium tracking-wide hidden sm:block" style={{ color: 'var(--text-muted)' }}>
               by Moestilos
@@ -84,6 +85,7 @@ export function Navbar() {
 
         {/* ── Auth ── */}
         <div className="flex items-center gap-2 flex-shrink-0">
+          <ThemeSwitcher />
           {isAdmin && (
             <Link
               href="/admin"
@@ -113,7 +115,6 @@ export function Navbar() {
                     colorTextSecondary:    '#8080a8',
                     colorDanger:           '#f87171',
                     colorNeutral:          '#8080a8',
-                    colorAlphaShade:       '#ffffff',
                     borderRadius:          '10px',
                     fontFamily:            "'Inter', system-ui, sans-serif",
                   },
@@ -151,9 +152,9 @@ function PriceBadge() {
     <span
       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-semibold"
       style={{
-        color: '#a5b4fc',
-        background: 'rgba(99,102,241,0.12)',
-        border: '1px solid rgba(99,102,241,0.22)',
+        color: 'rgb(var(--brand-light-rgb))',
+        background: 'rgba(var(--brand-rgb),0.12)',
+        border: '1px solid rgba(var(--brand-rgb),0.22)',
       }}
     >
       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

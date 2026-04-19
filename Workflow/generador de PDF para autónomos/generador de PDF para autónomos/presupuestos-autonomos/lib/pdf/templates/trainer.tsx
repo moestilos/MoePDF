@@ -254,7 +254,7 @@ export function TrainerPDF({ data }: TrainerPDFProps) {
         {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Text style={styles.badgeText}>💪 Entrenamiento Personal</Text>
+            <Text style={styles.badgeText}>Entrenamiento Personal</Text>
             <Text style={styles.title}>Plan de Entrenamiento</Text>
             <Text style={styles.subtitle}>Propuesta personalizada</Text>
           </View>
@@ -326,7 +326,7 @@ export function TrainerPDF({ data }: TrainerPDFProps) {
             <Text style={styles.sectionTitle}>¿Qué incluye tu programa?</Text>
             {includesList.map((item, i) => (
               <View key={i} style={styles.includeItem}>
-                <Text style={styles.bullet}>✓</Text>
+                <Text style={styles.bullet}>+</Text>
                 <Text style={styles.includeText}>{item}</Text>
               </View>
             ))}

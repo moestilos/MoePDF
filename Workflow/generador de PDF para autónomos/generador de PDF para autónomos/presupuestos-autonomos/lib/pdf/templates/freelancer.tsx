@@ -254,7 +254,7 @@ export function FreelancerPDF({ data }: FreelancerPDFProps) {
         <View style={styles.header}>
           <View style={styles.headerAccent} />
           <View style={styles.headerContent}>
-            <Text style={styles.eyebrow}>💼 Servicio Freelance</Text>
+            <Text style={styles.eyebrow}>Servicio Freelance</Text>
             <Text style={styles.title}>Presupuesto</Text>
             <Text style={styles.subtitle}>{data.service_type ?? 'Propuesta de servicios profesionales'}</Text>
           </View>

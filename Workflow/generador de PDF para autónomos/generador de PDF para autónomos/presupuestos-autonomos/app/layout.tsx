@@ -25,6 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ClerkProvider>
       <html lang="es">
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var t=localStorage.getItem('moe-theme')||'indigo';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+            }}
+          />
+        </head>
         <body>
           {/* Fondo animado: grid de cuadros + orbs flotantes */}
           <div className="animated-bg" aria-hidden="true">

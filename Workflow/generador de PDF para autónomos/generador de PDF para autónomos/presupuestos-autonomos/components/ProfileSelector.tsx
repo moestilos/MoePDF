@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import { ALL_PROFILES, Profile, ProfileType } from '@/lib/profiles'
 import { IconBrush, IconBriefcase, IconBarbell, IconCamera, IconCheck } from './Icons'
 
-const PROFILE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+const PROFILE_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   designer:     IconBrush,
   freelancer:   IconBriefcase,
   trainer:      IconBarbell,

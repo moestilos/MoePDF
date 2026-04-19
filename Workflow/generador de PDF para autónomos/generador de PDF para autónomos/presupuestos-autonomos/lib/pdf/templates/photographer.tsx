@@ -277,7 +277,7 @@ export function PhotographerPDF({ data }: PhotographerPDFProps) {
           {/* HEADER */}
           <View style={styles.header}>
             <View style={styles.headerLeft}>
-              <Text style={styles.eyebrow}>📷 Fotografía Profesional</Text>
+              <Text style={styles.eyebrow}>Fotografia Profesional</Text>
               <Text style={styles.title}>Presupuesto</Text>
               <Text style={styles.subtitle}>Propuesta fotográfica personalizada</Text>
             </View>
@@ -324,7 +324,7 @@ export function PhotographerPDF({ data }: PhotographerPDFProps) {
               <Text style={styles.sectionTitle}>Entregables incluidos</Text>
               {deliverables.map((item, i) => (
                 <View key={i} style={styles.deliverableItem}>
-                  <Text style={styles.deliverableIcon}>→</Text>
+                  <Text style={styles.deliverableIcon}>{'>'}</Text>
                   <Text style={styles.deliverableText}>{item}</Text>
                 </View>
               ))}

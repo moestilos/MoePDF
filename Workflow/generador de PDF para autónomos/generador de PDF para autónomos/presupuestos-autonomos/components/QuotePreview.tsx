@@ -117,7 +117,7 @@ export function QuotePreview({ data, profileType, generationId, downloadToken, i
           {/* Info grid */}
           <div className="grid grid-cols-2 gap-3">
             <InfoBlock label="Para" value={String(data.client_name ?? '')} />
-            {data.client_email && <InfoBlock label="Email" value={String(data.client_email)} />}
+            {Boolean(data.client_email) && <InfoBlock label="Email" value={String(data.client_email)} />}
           </div>
 
           {/* Descripción */}

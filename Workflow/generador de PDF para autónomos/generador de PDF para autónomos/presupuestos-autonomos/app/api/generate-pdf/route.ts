@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     const filename = `presupuesto-${generation.profile_type}-${generation_id.slice(0, 8)}.pdf`
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
