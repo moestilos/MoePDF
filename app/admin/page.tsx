@@ -42,7 +42,7 @@ export default async function AdminPage() {
               className="w-7 h-7 rounded-lg flex items-center justify-center"
               style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.35)' }}
             >
-              <IconCrown className="w-4 h-4" style={{ color: '#c4b5fd' }} />
+              <IconCrown className="w-4 h-4" style={{ color: 'rgb(var(--brand-light-rgb))' }} />
             </div>
             <span className="font-bold text-[15px] text-white">Panel Admin</span>
             <span
