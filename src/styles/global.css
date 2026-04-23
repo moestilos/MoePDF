@@ -6,28 +6,32 @@
 
 @layer base {
   :root {
-    --bg: 248 250 249;
-    --bg-elevated: 255 255 255;
-    --surface: 255 255 255;
-    --surface-hover: 241 245 244;
-    --border: 226 232 231;
-    --border-strong: 203 213 212;
-    --text: 15 23 22;
-    --muted: 87 108 105;
+    --bg: 250 247 240;            /* cream paper */
+    --bg-elevated: 255 253 247;
+    --surface: 255 253 247;
+    --surface-hover: 244 240 230;
+    --border: 228 222 208;
+    --border-strong: 205 196 178;
+    --text: 24 26 25;
+    --muted: 96 100 92;
     --primary: 13 148 136;
     --primary-soft: 204 251 241;
     --cta: 234 88 12;
     --danger: 220 38 38;
     --warning: 202 138 4;
     --success: 22 163 74;
+    /* notebook grid */
+    --nb-minor: 24 26 25 / 0.07;
+    --nb-major: 24 26 25 / 0.13;
+    --nb-margin: 239 68 68 / 0.35;
   }
   .dark {
-    --bg: 8 12 11;
-    --bg-elevated: 14 19 18;
-    --surface: 17 24 23;
-    --surface-hover: 23 32 30;
-    --border: 30 41 39;
-    --border-strong: 46 60 57;
+    --bg: 10 14 13;
+    --bg-elevated: 16 22 20;
+    --surface: 20 28 26;
+    --surface-hover: 26 36 33;
+    --border: 34 46 42;
+    --border-strong: 52 68 62;
     --text: 236 254 250;
     --muted: 134 155 152;
     --primary: 45 212 191;
@@ -36,6 +40,10 @@
     --danger: 248 113 113;
     --warning: 251 191 36;
     --success: 74 222 128;
+    /* notebook grid on dark — softer teal tint */
+    --nb-minor: 134 239 220 / 0.07;
+    --nb-major: 134 239 220 / 0.12;
+    --nb-margin: 248 113 113 / 0.3;
   }
   html {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', system-ui, sans-serif;
@@ -49,10 +57,6 @@
   body {
     @apply bg-bg text-text min-h-dvh;
     overscroll-behavior: none;
-    background-image:
-      radial-gradient(circle at 10% 0%, rgb(var(--primary) / 0.08) 0%, transparent 40%),
-      radial-gradient(circle at 90% 100%, rgb(var(--cta) / 0.05) 0%, transparent 40%);
-    background-attachment: fixed;
   }
   input, textarea, select { font-size: 16px; } /* prevent iOS auto-zoom */
   /* Disable text selection on UI chrome (keep on task content) */
@@ -117,6 +121,66 @@
   @keyframes scaleIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Notebook grid animations */
+  .notebook-bg::before {
+    content: '';
+    position: absolute;
+    inset: -5%;
+    background: radial-gradient(ellipse at 20% 10%, rgb(var(--primary) / 0.06), transparent 45%),
+                radial-gradient(ellipse at 80% 90%, rgb(var(--cta) / 0.05), transparent 45%);
+    pointer-events: none;
+    animation: nbGlow 18s ease-in-out infinite alternate;
+  }
+  .notebook-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgb(var(--text) / 0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  @keyframes nbGlow {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-10px, 8px) scale(1.03); }
+    100% { transform: translate(8px, -6px) scale(1.05); }
+  }
+
+  .nb-pan {
+    animation: nbPan 60s linear infinite;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+  @keyframes nbPan {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-120px, -120px); }
+  }
+
+  .nb-line-minor, .nb-line-major {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: nbDraw 1.4s cubic-bezier(0.6, 0.05, 0.2, 1) forwards;
+  }
+  .nb-line-major { animation-delay: 0.15s; animation-duration: 1.6s; }
+  .nb-margin {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: nbDraw 2.2s cubic-bezier(0.6, 0.05, 0.2, 1) 0.3s forwards;
+  }
+  @keyframes nbDraw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .notebook-bg::before,
+    .nb-pan,
+    .nb-line-minor,
+    .nb-line-major,
+    .nb-margin { animation: none !important; stroke-dashoffset: 0 !important; }
   }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
