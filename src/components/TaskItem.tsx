@@ -4,6 +4,7 @@ import { Check, Calendar, GripVertical, Trash2 } from 'lucide-react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useTasks } from '@/lib/store';
+import { haptic } from '@/lib/haptics';
 import { formatDue, cn } from '@/lib/utils';
 import type { Task } from '@/lib/types';
 
@@ -34,9 +35,11 @@ export default function TaskItem({ task, onDeleted, sortable = false, index = 0 
 
   async function onDragEnd(_: any, info: PanInfo) {
     if (info.offset.x > 90) {
+      haptic('success');
       await toggle(task.id);
       x.set(0);
     } else if (info.offset.x < -90) {
+      haptic('warning');
       setRemoving(true);
       const deleted = await remove(task.id);
       if (deleted && onDeleted) onDeleted(deleted);
@@ -89,7 +92,7 @@ export default function TaskItem({ task, onDeleted, sortable = false, index = 0 
             </button>
           )}
           <button
-            onClick={() => toggle(task.id)}
+            onClick={() => { haptic(done ? 'tap' : 'success'); toggle(task.id); }}
             aria-label={done ? 'Marcar pendiente' : 'Completar'}
             className={cn(
               'mt-0.5 w-[22px] h-[22px] shrink-0 rounded-full border-2 flex items-center justify-center transition-all',

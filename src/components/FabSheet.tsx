@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Plus, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
 import { useTasks } from '@/lib/store';
+import { haptic } from '@/lib/haptics';
 import type { Priority } from '@/lib/types';
 
 export default function FabSheet({ demo }: { demo?: boolean }) {
@@ -16,7 +17,17 @@ export default function FabSheet({ demo }: { demo?: boolean }) {
   const loadTags = useTasks((s) => s.loadTags);
   const setDemo = useTasks((s) => s.setDemo);
 
-  useEffect(() => { if (demo) setDemo(true); loadTags(); }, [demo]);
+  useEffect(() => {
+    if (demo) setDemo(true);
+    loadTags();
+    // Handle ?new=1 from PWA shortcut
+    const url = new URL(window.location.href);
+    if (url.searchParams.get('new') === '1') {
+      setOpen(true);
+      url.searchParams.delete('new');
+      window.history.replaceState({}, '', url.toString());
+    }
+  }, [demo]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -32,6 +43,7 @@ export default function FabSheet({ demo }: { demo?: boolean }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim()) return;
+    haptic('success');
     await add({
       title: title.trim(),
       notes: notes.trim() || null,
@@ -43,10 +55,17 @@ export default function FabSheet({ demo }: { demo?: boolean }) {
     setOpen(false);
   }
 
+  function onSheetDragEnd(_: any, info: PanInfo) {
+    if (info.offset.y > 120 || info.velocity.y > 500) {
+      haptic('tap');
+      setOpen(false);
+    }
+  }
+
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => { haptic('tap'); setOpen(true); }}
         aria-label="Nueva tarea (atajo: N)"
         title="Nueva tarea (N)"
         className="fixed right-4 z-40 w-14 h-14 rounded-2xl text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus-visible:ring-4 focus-visible:ring-cta/40"
@@ -71,8 +90,12 @@ export default function FabSheet({ demo }: { demo?: boolean }) {
             <motion.div
               initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={{ top: 0, bottom: 0.3 }}
+              onDragEnd={onSheetDragEnd}
               role="dialog" aria-modal="true" aria-label="Nueva tarea"
-              className="fixed left-0 right-0 bottom-0 z-50 bg-surface rounded-t-2xl border-t border-border p-4 pb-safe-bottom max-h-[90dvh] overflow-auto"
+              className="fixed left-0 right-0 bottom-0 z-50 bg-bg-elevated rounded-t-3xl border-t border-border p-5 max-h-[92dvh] overflow-y-auto overscroll-contain"
               style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 1rem)' }}
             >
               <div className="w-10 h-1 rounded-full bg-border mx-auto mb-4" aria-hidden />

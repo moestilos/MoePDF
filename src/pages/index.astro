@@ -31,19 +31,37 @@ if (user) return Astro.redirect('/today');
       </a>
     </div>
 
-    <div class="relative flex items-center gap-6 text-xs text-muted animate-fade-up" style="animation-delay: 160ms">
+    <div class="relative flex items-center gap-5 text-xs text-muted animate-fade-up" style="animation-delay: 160ms">
       <span class="flex items-center gap-1.5">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="20 6 9 17 4 12"/></svg>
-        PWA iOS/Android
+        Instalable
       </span>
       <span class="flex items-center gap-1.5">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="20 6 9 17 4 12"/></svg>
-        Funciona offline
+        Offline
       </span>
       <span class="flex items-center gap-1.5">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="20 6 9 17 4 12"/></svg>
         Dark mode
       </span>
+    </div>
+
+    <div class="relative w-full max-w-sm card p-4 flex items-start gap-3 animate-fade-up" style="animation-delay: 240ms">
+      <div class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden>
+          <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+          <path d="M12 18h.01"/>
+        </svg>
+      </div>
+      <div class="text-left">
+        <p class="text-[13px] font-semibold leading-tight">Instálala en tu iPhone</p>
+        <p class="text-[12px] text-muted leading-snug mt-0.5">
+          Pulsa <span class="inline-flex items-center gap-1 align-middle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M12 2v13"/><path d="m7 7 5-5 5 5"/><path d="M5 21h14a2 2 0 0 0 2-2v-7"/><path d="M3 12v7a2 2 0 0 0 2 2"/></svg>
+            Compartir
+          </span> → <span class="font-medium text-text">Añadir a pantalla de inicio</span>
+        </p>
+      </div>
     </div>
   </div>
 </BaseLayout>

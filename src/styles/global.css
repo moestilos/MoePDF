@@ -38,19 +38,29 @@
     --success: 74 222 128;
   }
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', system-ui, sans-serif;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    touch-action: manipulation;
   }
   body {
     @apply bg-bg text-text min-h-dvh;
-    overscroll-behavior-y: none;
+    overscroll-behavior: none;
     background-image:
       radial-gradient(circle at 10% 0%, rgb(var(--primary) / 0.08) 0%, transparent 40%),
       radial-gradient(circle at 90% 100%, rgb(var(--cta) / 0.05) 0%, transparent 40%);
     background-attachment: fixed;
   }
+  input, textarea, select { font-size: 16px; } /* prevent iOS auto-zoom */
+  /* Disable text selection on UI chrome (keep on task content) */
+  button, nav, header, [role="button"] { -webkit-user-select: none; user-select: none; }
+  /* Safer tap targets on iOS */
+  button, a, input[type="checkbox"], [role="button"] { min-height: 44px; }
+  /* but keep inline link sizes natural */
+  p a, span a, li a { min-height: auto; }
   button, a, [role="button"] { cursor: pointer; }
   :focus-visible {
     @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg;
